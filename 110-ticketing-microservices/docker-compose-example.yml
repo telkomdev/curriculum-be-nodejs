@@ -1,0 +1,207 @@
+# docker-compose example to start all needed services
+# during dev.
+#
+# On prod env, you should not use this docker-compose yml:
+# - mongodb is usually a separate cluster of multiple servers
+# - you use kubernetes to manage node containers
+# - you use vault or kubernetes ENV to manage ENV and secrets
+#
+# This file assumes the following directory structure
+# - /path/to/base/directory
+#   - node  => nodejs app, cloned from git.
+#              rename cloned directory name if needed.
+#   - mongo => persistent directory for mongodb data.
+#   - docker-compose.yaml  => this file.
+#
+# See also node/docker/.env.example for ENV explanations.
+# 
+# Quick start:
+# - Enter /path/to/base/directory (whatever it is in your setup)
+# - Clone node app from git into the above directory structure,
+#   rename to "node" if needed.
+# - Create new directory "mongo" on the same level as "node".
+# - Copy "node/docker-compose-example.yaml" to
+#   "docker-compose.yaml". This will be your local configuration,
+#   not synced to git. Necessary because env variables in dev
+#   (including db connection) will be on this file.
+# - Build and start services: docker compose up --build -t1 -d
+# - Test: curl http://localhost:10081
+# - Stop services: docker compose down -t1
+
+version: '3'
+# this name will be useful for (e.g.) "docker compose -p"
+name: be-ticket-microservices
+
+services:
+  # This service name will be accessed by app in MONGODB_URI
+  mongodbUser:
+    image: mongo:4.4
+    # This will expose mongodb on port 10017 on docker host, useful for
+    # dev purposes. You should NOT expose db port directly
+    # on prod environment.
+    #
+    # Node app will acess this service using the ORIGINal port
+    # (27017) in MONGODB_URI.
+    ports:
+      - 10071:27017
+    # Where to store mongodb data.
+    volumes:
+      - ./mongo_user:/data/db
+    environment:
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_USERNAME 
+      # must be the same as MONGODB_USER on "node" service.
+      - MONGO_INITDB_ROOT_USERNAME=<mongodb user name>
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_PASSWORD 
+      # must be the same as MONGODB_PASS on "node" service.
+      - MONGO_INITDB_ROOT_PASSWORD=<password for mongodb user>
+  # This service name will be accessed by app in MONGODB_URI
+  mongodbRoute:
+    image: mongo:4.4
+    # This will expose mongodb on port 10017 on docker host, useful for
+    # dev purposes. You should NOT expose db port directly
+    # on prod environment.
+    #
+    # Node app will acess this service using the ORIGINal port
+    # (27017) in MONGODB_URI.
+    ports:
+      - 10072:27017
+    # Where to store mongodb data.
+    volumes:
+      - ./mongo_route:/data/db
+    environment:
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_USERNAME 
+      # must be the same as MONGODB_USER on "node" service.
+      - MONGO_INITDB_ROOT_USERNAME=<mongodb user name>
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_PASSWORD 
+      # must be the same as MONGODB_PASS on "node" service.
+      - MONGO_INITDB_ROOT_PASSWORD=<password for mongodb user>
+  # This service name will be accessed by app in MONGODB_URI
+  mongodbBooking:
+    image: mongo:4.4
+    # This will expose mongodb on port 10017 on docker host, useful for
+    # dev purposes. You should NOT expose db port directly
+    # on prod environment.
+    #
+    # Node app will acess this service using the ORIGINal port
+    # (27017) in MONGODB_URI.
+    ports:
+      - 10073:27017
+    # Where to store mongodb data.
+    volumes:
+      - ./mongo_booking:/data/db
+    environment:
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_USERNAME 
+      # must be the same as MONGODB_USER on "node" service.
+      - MONGO_INITDB_ROOT_USERNAME=<mongodb user name>
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_PASSWORD 
+      # must be the same as MONGODB_PASS on "node" service.
+      - MONGO_INITDB_ROOT_PASSWORD=<password for mongodb user>
+  # This service name will be accessed by app in MONGODB_URI
+  mongodbTicket:
+    image: mongo:4.4
+    # This will expose mongodb on port 10017 on docker host, useful for
+    # dev purposes. You should NOT expose db port directly
+    # on prod environment.
+    #
+    # Node app will acess this service using the ORIGINal port
+    # (27017) in MONGODB_URI.
+    ports:
+      - 10074:27017
+    # Where to store mongodb data.
+    volumes:
+      - ./mongo_ticket:/data/db
+    environment:
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_USERNAME 
+      # must be the same as MONGODB_USER on "node" service.
+      - MONGO_INITDB_ROOT_USERNAME=<mongodb user name>
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_PASSWORD 
+      # must be the same as MONGODB_PASS on "node" service.
+      - MONGO_INITDB_ROOT_PASSWORD=<password for mongodb user>
+  user:
+    depends_on:
+      - mongodbUser
+    ports:
+      - '10081:8081'
+    build: 
+      context: ./node/user
+      dockerfile: Dockerfile
+    environment:
+      - port=8081
+      - ORIGIN=*
+      - SECRET=<20 char alphanumeric string, with upper/lowercase>
+      # Secret key used to create admin user
+      - SECRET_KEY=<20 char alphanumeric string, with upper/lowercase>
+      # Use service name, port, user, and pass from "mongodb" service 
+      # on dev env
+      - MONGODB_URI=mongodb://mongodbUser:27017
+      - MONGODB_USER=<mongodb user name>
+      - MONGODB_PASS=<password for mongodb user>
+      # Which database to use
+      - MONGODB_DB=<mongodb database used>
+  route:
+    depends_on:
+      - mongodbRoute
+    ports:
+      - '10082:8082'
+    build: 
+      context: ./node/route
+      dockerfile: Dockerfile
+    environment:
+      - port=8082
+      - ORIGIN=*
+      - SECRET=<20 char alphanumeric string, with upper/lowercase>
+      # Secret key used to create admin user
+      - SECRET_KEY=<20 char alphanumeric string, with upper/lowercase>
+      # Use service name, port, user, and pass from "mongodb" service 
+      # on dev env
+      - MONGODB_URI=mongodb://mongodbRoute:27017
+      - MONGODB_USER=<mongodb user name>
+      - MONGODB_PASS=<password for mongodb user>
+      # Which database to use
+      - MONGODB_DB=<mongodb database used>
+      - FILE_PATH=/app/data
+  booking:
+    depends_on:
+      - mongodbBooking
+    ports:
+      - '10083:8083'
+    build: 
+      context: ./node/booking
+      dockerfile: Dockerfile
+    environment:
+      - port=8083
+      - ORIGIN=*
+      - SECRET=<20 char alphanumeric string, with upper/lowercase>
+      # Secret key used to create admin user
+      - SECRET_KEY=<20 char alphanumeric string, with upper/lowercase>
+      # Use service name, port, user, and pass from "mongodb" service 
+      - USER_API_URL=http://user:8081/api/v1/user/
+      # How other functions access Route API
+      - ROUTE_API_URL=http://route:8082/api/v1/route/
+      # How other functions access Ticket API
+      - TICKET_API_URL=http://ticket:8084/api/v1/ticket/
+      # on dev env
+      - MONGODB_URI=mongodb://mongodbBooking:27017
+      - MONGODB_USER=<mongodb user name>
+      - MONGODB_PASS=<password for mongodb user>
+      # Which database to use
+      - MONGODB_DB=<mongodb database used>
+  ticket:
+    depends_on:
+      - mongodbTicket
+    build: 
+      context: ./node/ticket
+      dockerfile: Dockerfile
+    environment:
+      - port=8084
+      - ORIGIN=*
+      - SECRET=<20 char alphanumeric string, with upper/lowercase>
+      # Secret key used to create admin user
+      - SECRET_KEY=<20 char alphanumeric string, with upper/lowercase>
+      # Use service name, port, user, and pass from "mongodb" service 
+      # on dev env
+      - MONGODB_URI=mongodb://mongodbTicket:27017
+      - MONGODB_USER=<mongodb user name>
+      - MONGODB_PASS=<password for mongodb user>
+      # Which database to use
+      - MONGODB_DB=<mongodb database used>

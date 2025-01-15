@@ -1,0 +1,94 @@
+openapi: '3.0.2'
+info:
+  description: '## Example of routing with express, adding GET and POST route' 
+  version: 1.0.0
+  title: 30-routing
+servers:
+  - url: http://localhost:10081
+tags:
+  - name: root  
+    description: "Request directly to root URL"
+  - name: item
+    description: "Request to item endpoint URL"
+paths: 
+  /:
+    get:
+      tags: 
+        - root
+      summary: Response this request with Hello Route
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html: 
+              schema: 
+                type: string
+                example: "Hello Route. Try GET/POST to /api/v1/item"
+  /api/v1/item:
+    get:
+      tags: 
+        - item
+      summary: Request will response with message placeholder JSON
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getItem"
+    post:
+      tags:
+        - item
+      summary: Request to create new item, server should validate the request body and will response this request
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createNewItem"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createItemSuccess"
+        "400":
+          description: Failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createItemFailed"
+components:
+  schemas:
+    getItem:
+      type: object
+      properties: 
+        message:
+          type: string
+          example: This route is a placeholder that will get all items later
+    createNewItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: item1
+        qty:
+          type: integer
+          example: 1
+    createItemSuccess:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: "This route is a placeholder that will save {\"name\":\"item1\",\"qty\":1} later"
+    createItemFailed:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "\"name\" and \"qty\" cannot be empty"
+

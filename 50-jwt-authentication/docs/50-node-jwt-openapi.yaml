@@ -1,0 +1,650 @@
+openapi: '3.0.2'
+info:
+  description: "## Add User Service to manage user, authentication and role authorization"
+  version: 1.0.0
+  title: 50-JWT-Authentication
+servers:
+  - url: http://localhost:10081
+tags:
+  - name: root 
+    description: "Request to root URL"
+  - name: user
+    description: "Request to user endpoint URL"
+  - name: item
+    description: "Create and find item endpoint URL"
+
+paths:
+  /:
+    get:
+      tags: 
+        - root
+      summary: Response this request with Hello Route
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html: 
+              schema: 
+                type: string
+                example: "Hello, this is user service with JWT authentication"
+  /api/v1/user/create/admin:
+    post:
+      tags: 
+        - user
+      summary: Create new user admin, need super admin secret key 
+      description: ""
+      operationId: "createAdmin"
+      parameters:
+      - in: header  
+        name: secret-key
+        required: true 
+        description: Your super admin secret-key
+        schema:
+          type: string
+      requestBody:
+        content:  
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createNewAdmin"
+        description: "User email, user name and password to register"
+        required: true
+      responses:
+        "201":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createNewUserSuccess"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createNewUserErrorEmail"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/noSecretKey"
+  /api/v1/user/auth:
+    post:
+      tags:
+        - user
+      summary: Login user 
+      description: ""
+      operationId: "loginUser"
+      requestBody:
+        content:  
+          application/json:
+            schema:
+              $ref: "#/components/schemas/loginUser"
+        description: "User email, and password to login"
+        required: true
+      responses:
+        "201":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/loginSuccess"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorLogin"
+  /api/v1/user/create:
+    post:
+      tags: 
+        - user
+      summary: Create new user, need role admin bearer token
+      description: ""
+      operationId: "createUser"
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:  
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createNewUser"
+        description: "User email, user name and password to register"
+        required: true
+      responses:
+        "201":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createNewUserSuccess"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createNewUserErrorEmail"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/noTokenProvided"
+  /api/v1/user/me:
+    get:
+      tags: 
+        - user
+      summary: Get current login user profile
+      description: ""
+      operationId: "getMe"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getMe"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/noTokenProvided"
+  /api/v1/user:
+    get:
+      tags:
+        - user
+      summary: Get all user and search all user by name, this endpoint only available for role admin
+      description: ""
+      operationId: "findAll"
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: name
+          required: false
+          description: "String query to search filter by name "
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/findAll"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+  "/api/v1/user/{id}":
+    get:
+      tags:
+        - user
+      summary: Find user by id, this feature need role admin
+      description: ""
+      operationId: findUserById
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: User id to search
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/findById-success"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/userNotFound"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+    put:
+      tags:
+        - user
+      summary: Update user by id, this feature need Role Admin
+      description: ""
+      security: 
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: User id to update
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateUserById"
+        description: Object that need to be update
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/updateUserSuccess"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/updateUserError"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+    delete:
+      tags:
+        - user
+      summary: Delete user by id, this endpoint need Role Admin
+      description: ""
+      security: 
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: User id to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/deleteUserSuccess"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/deleteUserError"
+        "401":
+          description: Failed unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+  /api/v1/item:
+    get:
+      tags: 
+        - item
+      summary: This endpoint will show all item data in JSON format
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getItem"
+    post:
+      tags:
+        - item
+      summary: Request to create new item, need too login and authorized as user or admin.
+      description: ""
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createNewItem"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createItemSuccess"
+        "400":
+          description: Failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createItemFailed"
+components:
+  securitySchemes:
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    getItem:
+      type: object
+      properties: 
+        success: 
+          type: integer
+          example: 1
+        count:
+          type: integer
+          example: 2
+        data:
+          type: array
+          items: 
+            type: object
+            properties:
+              _id: 
+                type: string
+              name: 
+                type: string
+              qty: 
+                type: integer 
+              createdAt: 
+                type: string
+              updatedAt:
+                type: string
+              __v: 
+                type: integer
+          example:
+            - _id: 631b39fed4aa0bf0369ae112
+              name: item1
+              qty: 1
+              createdAt: 2022-09-09T13:05:02.605Z
+              updatedAt: 2022-09-09T13:05:02.605Z
+              __v: 0
+            - _id: 631b3a1fd4aa0bf0369ae115
+              name: item2
+              qty: 2
+              createdAt: 2022-09-09T13:05:35.630Z
+              updatedAt: 2022-09-09T13:05:35.630Z
+              __v: 0
+    createNewItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: item1
+        qty:
+          type: integer
+          example: 1
+    createItemSuccess:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: item1
+        qty:
+          type: integer 
+          example: 1
+        __id: 
+          type: string
+          example: 631b39fed4aa0bf0369ae112
+        createdAt:
+          type: string
+          example: "2022-09-09T13:05:02.605Z"
+        updatedAt:
+          type: string
+          example: "2022-09-09T13:05:02.605Z"
+        __v:
+          type: integer 
+          example: 0
+    createItemFailed:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "\"name\" and \"qty\" cannot be empty"
+    createNewAdmin:
+      type: object
+      properties:
+        email:
+          type: string
+          example: john.doe@email.com
+        name: 
+          type: string
+          example: John Doe
+        password:
+          type: string
+          example: 123456
+    createNewUser:
+      type: object
+      properties:
+        email:
+          type: string
+          example: testuser@email.com
+        name: 
+          type: string
+          example: Test User
+        password:
+          type: string
+          example: 123456
+    createNewUserSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User was registered successfully!
+    createNewUserErrorEmail:
+      type: object
+      properties:
+        message:  
+          type: string
+          example: "user validation failed: email: Please enter a valid email"
+    unauthorizedError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Unauthorized!"
+    noSecretKey:
+      type: object
+      properties:
+        message:  
+          type: string
+          example: "No secret-key provided!"
+    noTokenProvided:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "No token provided!"
+    loginUser:
+      type: object
+      properties:
+        email: 
+          type: string
+          example: john.doe@email.com
+        password:
+          type: string
+          example: 123456
+    loginSuccess:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "631ea538d576f4fa0533d27e"
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john.doe@email.com
+        roles:
+          type: object
+          $ref: "#/components/schemas/roleAdmin"
+        accessToken:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWVlNTk3M2RiNmViOTgyY2M3ZjUxMSIsInJvbGVzIjpbImFkbWluIl0sImlhdCI6MTY2Mjk2OTQ1NSwiZXhwIjoxNjYzMDU1ODU1fQ.JncDu01Afc8elXDZBZAz-AJjG5KeeyNMRqbpsBcl9Sk"
+    roleAdmin:
+      type: array
+      items: 
+        type: string
+        example: admin
+    roleUser:
+      type: array
+      items: 
+        type: string
+        example: user
+    errorLogin:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: User Not Found!
+    getMe: 
+      type: object
+      properties: 
+        id:
+          type: string
+          example: 631ee5973db6eb982cc7f511
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john.doe@email.com
+        roles:
+          type: array
+          items:
+            type: string
+            example: admin
+    getAdmin:
+      type: object
+      properties: 
+        id:
+          type: string
+          example: 631ee5973db6eb982cc7f511
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john.doe@email.com
+        roles:
+          type: array
+          items:
+            properties: 
+              _id: 
+                type: string
+                example: 631ee58d3db6eb982cc7f50d
+              name:
+                type: string
+                example: admin
+        createdAt:
+          type: string
+          example: "2022-09-12T03:19:20.279Z"
+        updatedAt:
+          type: string
+          example: "2022-09-12T03:19:20.315Z"
+    findAll:
+      type: object
+      properties:
+        success: 
+          type: integer
+          example: 1
+        count:
+          type: integer
+          example: 2
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/getAdmin'
+          example:
+            - id: 631ee5973db6eb982cc7f511
+              name: John Doe
+              email: john.doe@email.com
+              roles: [{id: 631ee58d3db6eb982cc7f50d, name: admin}]
+              createdAt: "2022-09-12T03:19:20.279Z"
+              updatedAt: "2022-09-12T03:19:20.315Z"
+            - id: 631ef2b8c317b521ed7c6de6
+              name: Bruce Wayne
+              email: bruce.wayne@email.com
+              roles: [{id: 631ee58d3db6eb982cc7f50c, name: user}]
+              createdAt: "2022-09-12T08:50:00.732Z"
+              updatedAt: "2022-09-12T08:50:00.744Z"
+    findById-success:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 631ef2b8c317b521ed7c6de6
+        name:
+          type: string
+          example: Bruce Wayne
+        email:
+          type: string
+          example: bruce.wayne@email.com
+        roles:
+          type: array
+          items:
+            properties: 
+              _id: 
+                type: string
+                example: 631ee58d3db6eb982cc7f50c
+              name:
+                type: string
+                example: user
+        createdAt:
+          type: string
+          example: "2022-09-12T08:50:00.732Z"
+        updatedAt:
+          type: string
+          example: "2022-09-12T08:50:00.744Z"
+    userNotFound:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Error retrieving Users with id=631ef2b8c317b521ed7c6de6aa, maybe user was not found
+    updateUserById:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Your edited name
+    updateUserSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User was updated successfully.
+    updateUserError:
+      type: object
+      properties:
+        message:  
+          type: string
+          example: Error updating user with id=631ea95d0770f442fd692fa8aa
+    deleteUserSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User with id 631ea95d0770f442fd692fa8 was deleted successfully!
+    deleteUserError:
+      type: object
+      properties:
+        message:  
+          type: string
+          example: Could not delete user with id=631ea95d0770f442fd692fa8aa

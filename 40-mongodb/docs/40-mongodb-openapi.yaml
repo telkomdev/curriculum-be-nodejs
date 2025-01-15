@@ -1,0 +1,143 @@
+openapi: '3.0.2'
+info:
+  description: "## Using MongoDB in node \n GET item list from database and POST new item (save item data to database)" 
+  version: 1.0.0
+  title: 40-mongodb
+servers:
+  - url: http://localhost:10081
+tags:
+  - name: root  
+    description: "Request directly to root URL"
+  - name: item
+    description: "Request to item endpoint URL"
+paths: 
+  /:
+    get:
+      tags: 
+        - root
+      summary: Response this request with Hello Route
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html: 
+              schema: 
+                type: string
+                example: "Hello Route. Try GET/POST to /api/v1/item"
+  /api/v1/item:
+    get:
+      tags: 
+        - item
+      summary: This endpoint will show all item data in JSON format
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getItem"
+    post:
+      tags:
+        - item
+      summary: Request to create new item, server will save data in the MongoDB and return with record data when success
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createNewItem"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createItemSuccess"
+        "400":
+          description: Failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createItemFailed"
+components:
+  schemas:
+    getItem:
+      type: object
+      properties: 
+        success: 
+          type: integer
+          example: 1
+        count:
+          type: integer
+          example: 2
+        data:
+          type: array
+          items: 
+            type: object
+            properties:
+              _id: 
+                type: string
+              name: 
+                type: string
+              qty: 
+                type: integer 
+              createdAt: 
+                type: string
+              updatedAt:
+                type: string
+              __v: 
+                type: integer
+            example:
+              - _id: 631b39fed4aa0bf0369ae112
+                name: item1
+                qty: 1
+                createdAt: 2022-09-09T13:05:02.605Z
+                updatedAt: 2022-09-09T13:05:02.605Z
+                __v: 0
+              - _id: 631b3a1fd4aa0bf0369ae115
+                name: item2
+                qty: 2
+                createdAt: 2022-09-09T13:05:35.630Z
+                updatedAt: 2022-09-09T13:05:35.630Z
+                __v: 0
+    createNewItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: item1
+        qty:
+          type: integer
+          example: 1
+    createItemSuccess:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: item1
+        qty:
+          type: integer 
+          example: 1
+        __id: 
+          type: string
+          example: 631b39fed4aa0bf0369ae112
+        createdAt:
+          type: string
+          example: 2022-09-09T13:05:02.605Z
+        updatedAt:
+          type: string
+          example: 2022-09-09T13:05:02.605Z
+        __v:
+          type: integer 
+          example: 0
+
+    createItemFailed:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "\"name\" and \"qty\" cannot be empty"
+

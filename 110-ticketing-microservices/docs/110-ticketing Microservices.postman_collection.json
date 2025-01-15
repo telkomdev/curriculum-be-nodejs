@@ -1,0 +1,4654 @@
+{
+	"info": {
+		"_postman_id": "da75de85-9e5a-4d53-84cd-11690b69f5c8",
+		"name": "110-ticketing Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "519759"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register Admin User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "secret-key",
+								"value": "{{secret-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"john.doe@email.com\",\r\n    \"name\": \"John Doe\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userHost}}/api/v1/user/create/admin",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create",
+								"admin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register First User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "secret-key",
+										"value": "{{secret-key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"john.doe@email.com\",\r\n    \"name\": \"John Doe\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create/admin",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create",
+										"admin"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-ycIOj/6kXGxPaEoiW5+ikfXgO5w\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:19:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User was registered successfully!\"\n}"
+						},
+						{
+							"name": "Register First User - error invalid email address",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "secret-key",
+										"value": "{{secret-key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"john.doe@\",\r\n    \"name\": \"John Doe\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create/admin",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create",
+										"admin"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-5usNJRkamVP4m3OnMjz9RhQvkTw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:19:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"user validation failed: email: Please enter a valid email\"\n}"
+						},
+						{
+							"name": "Register First User - error password validation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "secret-key",
+										"value": "{{secret-key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"john.doe@email.com\",\r\n    \"name\": \"John Doe\",\r\n    \"password\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create/admin",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create",
+										"admin"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-nJHXWn6UCREbLzoKRt7PT+d9t9c\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:20:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password min length 6 characters\"\n}"
+						},
+						{
+							"name": "Register First User - error no secret key",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "secret-key",
+										"value": "{{secret-key}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"john.doe@email.com\",\r\n    \"name\": \"John Doe\",\r\n    \"password\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create/admin",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create",
+										"admin"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-IRYuzQNOxkvk/czbd7qdDz4L6h0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:32:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No secret-key provided!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"john.doe@email.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userHost}}/api/v1/user/auth",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"auth"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"john.doe@email.com\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/auth",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "313"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"139-sDqXXzjdrghD3QtI9vS2aZIp9aU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 07:57:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"631ee5973db6eb982cc7f511\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@email.com\",\n    \"roles\": [\n        \"admin\"\n    ],\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWVlNTk3M2RiNmViOTgyY2M3ZjUxMSIsInJvbGVzIjpbImFkbWluIl0sImlhdCI6MTY2Mjk2OTQ1NSwiZXhwIjoxNjYzMDU1ODU1fQ.JncDu01Afc8elXDZBZAz-AJjG5KeeyNMRqbpsBcl9Sk\"\n}"
+						},
+						{
+							"name": "Login  - error user not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"john.doe@gmail.co\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/auth",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"auth"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-ONHRvxExHY8DW07p5+eLKxrMMEQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 02 Sep 2022 04:32:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User Not Found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userHost}}/api/v1/user/me",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Me",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/me",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"65-GgWkWyiV/tEdFMBuudElEqpeKCU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 07:58:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"631ee5973db6eb982cc7f511\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@email.com\",\n    \"roles\": [\n        \"admin\"\n    ]\n}"
+						},
+						{
+							"name": "Get Me - error no token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/me",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"me"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:44:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						},
+						{
+							"name": "Get Me - error unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/me",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"me"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:44:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Bruce Wayne\",\r\n    \"email\":\"bruce.wayne@email.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userHost}}/api/v1/user/create",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Bruce Wayne\",\r\n    \"email\":\"bruce.wayne@email.com\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-ycIOj/6kXGxPaEoiW5+ikfXgO5w\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:37:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User was registered successfully!\"\n}"
+						},
+						{
+							"name": "Create User - error email already in use",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Bruce Wayne\",\r\n    \"email\":\"bruce.wayne@email.com\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-vZ9yHSJGXW8Ir8PwCc5hNBWjdj0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:37:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Failed! Email is already in use\"\n}"
+						},
+						{
+							"name": "Create User  - error email validation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Bruce Wayne\",\r\n    \"email\":\"emailuser@email\",\r\n    \"password\":\"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-5usNJRkamVP4m3OnMjz9RhQvkTw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:38:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"user validation failed: email: Please enter a valid email\"\n}"
+						},
+						{
+							"name": "Create User - error password validation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Bruce Wayne\",\r\n    \"email\":\"emailuser3@email.com\",\r\n    \"password\":\"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-nJHXWn6UCREbLzoKRt7PT+d9t9c\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:41:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password min length 6 characters\"\n}"
+						},
+						{
+							"name": "Create User  - error no token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Bruce Wayne\",\r\n    \"email\":\"emailuser3@email.com\",\r\n    \"password\":\"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/create",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:42:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Find All User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userHost}}/api/v1/user?name=Bruc&page=1&size=2",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Bruc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Find All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user?page=1&size=2",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "rob",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "507"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1fb-ZBsUjxaDz9jGe8hI8s25++5qE7g\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:25:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1,\n    \"count\": 4,\n    \"totalPages\": 2,\n    \"currentPage\": 1,\n    \"users\": [\n        {\n            \"name\": \"John Doe\",\n            \"email\": \"john.doe@email.com\",\n            \"roles\": [\n                {\n                    \"_id\": \"6320263cdcd60d96c8e316c5\",\n                    \"name\": \"admin\"\n                }\n            ],\n            \"createdAt\": \"2022-09-13T06:59:38.791Z\",\n            \"updatedAt\": \"2022-09-13T06:59:38.802Z\",\n            \"id\": \"63202a5adcd60d96c8e316cb\"\n        },\n        {\n            \"name\": \"Bruce Wayne\",\n            \"email\": \"bruce.wayne@email.com\",\n            \"roles\": [\n                {\n                    \"_id\": \"6320263cdcd60d96c8e316c4\",\n                    \"name\": \"user\"\n                }\n            ],\n            \"createdAt\": \"2022-09-13T07:19:47.058Z\",\n            \"updatedAt\": \"2022-09-13T07:19:47.074Z\",\n            \"id\": \"63202f13be8620c4cf9fc030\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Find All Users - filter by name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user?name=Bruc&page=1&size=2",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Bruc"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"120-NgjN2enfkVYWDy3sZLsVQhcnbLo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:26:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1,\n    \"count\": 1,\n    \"totalPages\": 1,\n    \"currentPage\": 1,\n    \"users\": [\n        {\n            \"name\": \"Bruce Wayne\",\n            \"email\": \"bruce.wayne@email.com\",\n            \"roles\": [\n                {\n                    \"_id\": \"6320263cdcd60d96c8e316c4\",\n                    \"name\": \"user\"\n                }\n            ],\n            \"createdAt\": \"2022-09-13T07:19:47.058Z\",\n            \"updatedAt\": \"2022-09-13T07:19:47.074Z\",\n            \"id\": \"63202f13be8620c4cf9fc030\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Find All Users - error unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "user",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:51:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Find user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userHost}}/api/v1/user/6321a4a8da8ed8bec0fed8c0",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"6321a4a8da8ed8bec0fed8c0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Find user by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "219"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"db-tv2gIFRnDsdN4vsfGJ7BzvSB+Wo\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:52:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Bruce Wayne\",\n    \"email\": \"bruce.wayne@email.com\",\n    \"roles\": [\n        {\n            \"_id\": \"631ea521d576f4fa0533d279\",\n            \"name\": \"user\"\n        }\n    ],\n    \"createdAt\": \"2022-09-12T03:37:01.627Z\",\n    \"updatedAt\": \"2022-09-12T03:37:01.636Z\",\n    \"id\": \"631ea95d0770f442fd692fa8\"\n}"
+						},
+						{
+							"name": "Find user by id - error user id was not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8aa",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8aa"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "108"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6c-kG+3PmxF1CcvQzGqOzMytq5IR+I\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:58:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error retrieving Users with id=631ea95d0770f442fd692fa8aa, maybe user was not found\"\n\n}"
+						},
+						{
+							"name": "Find user by id - error unauathorized wrong token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:58:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Test User Edited\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"631ea95d0770f442fd692fa8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update user by Id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\":\"Test User Edited\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-WG15xSmgnoVqMf97Ft9oeuoYeSc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:59:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User was updated successfully.\"\n}"
+						},
+						{
+							"name": "Update user by Id - error user unauthorized",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\":\"Test User Edited\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 04:00:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						},
+						{
+							"name": "Update user by Id - error user id not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\":\"Test User Edited\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8aa",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8aa"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-h6Sp1Aq2JIrpzOIGWu8c8QRZMgg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 04:00:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error updating user with id=631ea95d0770f442fd692fa8aa\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8",
+							"host": [
+								"{{userHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"631ea95d0770f442fd692fa8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete user by id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-hVYbmT5rO8T3/WE40vAHCRlNEME\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 04:11:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User with id 631ea95d0770f442fd692fa8 was deleted successfully!\"\n}"
+						},
+						{
+							"name": "Delete user by id - error user id not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8aa",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8aa"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"51-RGERsEDtgzAZFfuBCA+syBebeSU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 04:10:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Could not delete user with id=631ea95d0770f442fd692fa8aa\"\n}"
+						},
+						{
+							"name": "Delete user by id - error unauthorized",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}/api/v1/user/631ea95d0770f442fd692fa8a",
+									"host": [
+										"{{userHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"631ea95d0770f442fd692fa8a"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 04:09:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hello User Service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userHost}}",
+							"host": [
+								"{{userHost}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Hello User Service",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{userHost}}",
+									"host": [
+										"{{userHost}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-euBlRPLOjHmPjUjJBsJHvmTqDLc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Sep 2022 04:12:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"This is ticketing user services.\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "Import Data Route File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "routeFile",
+									"type": "file",
+									"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{routeHost}}/api/v1/route/import",
+							"host": [
+								"{{routeHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route",
+								"import"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Import Data Route File",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/import",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-3FL+oOCPbtbANHFFusgXkEGCC00\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:10:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Route data has successfully imported\"\n}"
+						},
+						{
+							"name": "Import Data Route File - error no file",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/import",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-x/cRPKjn/s6boLE6LEgNxn/1P/Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:11:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No files were uploaded\"\n}"
+						},
+						{
+							"name": "Import Data Route File - error no token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/import",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:11:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						},
+						{
+							"name": "Import Data Route File - error required admin role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/import",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-yJZAZo1xBrkx6ovRbYzgTmtQpB0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:18:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Require Admin Role!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create new route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{routeHost}}/api/v1/route",
+							"host": [
+								"{{routeHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create new route",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b8-vD/Wj0gx6T0Cck4S5m7hIZIq3Cs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:12:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"from\": \"Malang\",\n    \"to\": \"Jakarta\",\n    \"price\": 200000,\n    \"departureTime\": \"09:00:00\",\n    \"createdAt\": \"2022-09-13T01:12:00.000Z\",\n    \"updatedAt\": \"2022-09-13T01:12:00.000Z\",\n    \"id\": \"631fd8dff7a9117a6a09de96\"\n}"
+						},
+						{
+							"name": "Create new route - error missing field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-qsJKeKcQ5cRDNl2weA3gCJ0vv0A\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:12:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Field from, to, price, departureTime cannot be empty\"\n}"
+						},
+						{
+							"name": "Create new route - error no token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:12:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						},
+						{
+							"name": "Create new route - error required admin role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-yJZAZo1xBrkx6ovRbYzgTmtQpB0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:19:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Require Admin Role!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{routeHost}}/api/v1/route?page=1&size=3",
+							"host": [
+								"{{routeHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "Malang",
+									"disabled": true
+								},
+								{
+									"key": "to",
+									"value": "Jakarta",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Route - Pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route?to=Jakarta&page=2&size=3",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "Jakarta"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "623"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26f-rPzlwPeFJwv/j8Xzy/4jEpfo1kc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:47:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"count\": 7,\n    \"totalPages\": 3,\n    \"currentPage\": 2,\n    \"routes\": [\n        {\n            \"departureTime\": \"12:00:00\",\n            \"from\": \"Yogyakarta\",\n            \"price\": 250000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T07:42:26.440Z\",\n            \"updatedAt\": \"2022-09-13T07:42:26.440Z\",\n            \"id\": \"63203462e48745f34f1207bc\"\n        },\n        {\n            \"departureTime\": \"13:00:00\",\n            \"from\": \"Solo\",\n            \"price\": 225000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T07:42:26.441Z\",\n            \"updatedAt\": \"2022-09-13T07:42:26.441Z\",\n            \"id\": \"63203462e48745f34f1207c0\"\n        },\n        {\n            \"departureTime\": \"10:00:00\",\n            \"from\": \"Semarang\",\n            \"price\": 200000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T07:42:26.439Z\",\n            \"updatedAt\": \"2022-09-13T07:42:26.439Z\",\n            \"id\": \"63203462e48745f34f1207ce\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get All Route - error unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route?to=Jakarta&page=2&size=3",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "Jakarta"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:51:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						},
+						{
+							"name": "Get All Route - error no token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route?to=Jakarta&page=2&size=3",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "Jakarta"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:51:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Route by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ee",
+							"host": [
+								"{{routeHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route",
+								"631fd2648547b98f23fd08ee"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Route by Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b8-cRBSu+upo4DeSHXWtWuJ6w2hMM0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:14:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"from\": \"Malang\",\n    \"to\": \"Bandung\",\n    \"price\": 250000,\n    \"departureTime\": \"15:00:00\",\n    \"createdAt\": \"2022-09-13T00:44:20.383Z\",\n    \"updatedAt\": \"2022-09-13T00:52:43.084Z\",\n    \"id\": \"631fd2648547b98f23fd08ee\"\n}"
+						},
+						{
+							"name": "Get Route by Id - error no route with id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ea",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ea"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-cHRVzqidVn7cWtwxysuSq2djrJ4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:15:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Not found route with id 631fd2648547b98f23fd08ea\"\n}"
+						},
+						{
+							"name": "Get Route by Id - error no token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:14:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Route by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ee",
+							"host": [
+								"{{routeHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route",
+								"631fd2648547b98f23fd08ee"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Route by Id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-8ZwoGGk/hAPJ+DmJLtVeq0qCOvo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:17:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Route was updated successfully.\"\n}"
+						},
+						{
+							"name": "Edit Route by Id - error route not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ea",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ea"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-6oCnfJ3EExTHeQOf0uO36YnCYdM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:17:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cannot update route with id=631fd2648547b98f23fd08ea. Maybe route was not found!\"\n}"
+						},
+						{
+							"name": "Edit Route by Id - error no token",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ea",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ea"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:18:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						},
+						{
+							"name": "Edit Route by Id - error required admin role",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{routeHost}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{routeHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-yJZAZo1xBrkx6ovRbYzgTmtQpB0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:19:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Require Admin Role!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hello Route Service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{routeHost}}",
+							"host": [
+								"{{routeHost}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Hello Route Service",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{routeHost}}",
+									"host": [
+										"{{routeHost}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-fxVlCSXuIApGxEaFpePb5WIWqWc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Sep 2022 04:13:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"This is ticketing app, route service\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Create New Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"routeId\":\"6321aa15458816c5f6384acc\",\r\n    \"quantity\": 2,\r\n    \"scheduleDate\" : \"2022-10-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bookingHost}}/api/v1/booking",
+							"host": [
+								"{{bookingHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"booking"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create New Booking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeId\":\"632145b11a21e101d8d69d1d\",\r\n    \"quantity\": 2,\r\n    \"scheduleDate\" : \"2022-10-1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "871"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"367-SWijioivybijCFrUXQMhfy0KaOM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 05:40:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"632131ee55dfb08745d2250b\",\n        \"name\": \"Bruce Wayne\",\n        \"email\": \"bruce.wayne@email.com\"\n    },\n    \"quantity\": 2,\n    \"totalPrice\": 500000,\n    \"paymentStatus\": 0,\n    \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n    \"tickets\": [\n        {\n            \"id\": \"632169497f0236bfb3e8fce0\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169497f0236bfb3e8fcde\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:25.766Z\",\n            \"updatedAt\": \"2022-09-14T05:40:25.766Z\",\n            \"price\": 250000\n        },\n        {\n            \"id\": \"632169497f0236bfb3e8fce2\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169497f0236bfb3e8fcde\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:25.775Z\",\n            \"updatedAt\": \"2022-09-14T05:40:25.775Z\",\n            \"price\": 250000\n        }\n    ],\n    \"createdAt\": \"2022-09-14T05:40:25.760Z\",\n    \"updatedAt\": \"2022-09-14T05:40:25.782Z\",\n    \"id\": \"632169497f0236bfb3e8fcde\"\n}"
+						},
+						{
+							"name": "Create New Booking - route not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeId\":\"632145b11a21e101d8d69d1\",\r\n    \"quantity\": 5,\r\n    \"scheduleDate\" : \"2022-09-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "97"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61-tfxO+NWjkVHos5e4kM5O+FHlhr8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 03:36:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error when retrieving data route, maybe route with 632145b11a21e101d8d69d1 not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Bookings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{bookingHost}}/api/v1/booking?size=4&page=1",
+							"host": [
+								"{{bookingHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"booking"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "4"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Bookings",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking?size=4&page=2",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "4"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "939"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3ab-ob/6EfBTMjHikHV9QOxbnFZRbBA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 05:44:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1,\n    \"count\": 5,\n    \"totalPages\": 2,\n    \"currentPage\": 2,\n    \"bookings\": [\n        {\n            \"user\": {\n                \"id\": \"632131ee55dfb08745d2250b\",\n                \"name\": \"Bruce Wayne\",\n                \"email\": \"bruce.wayne@email.com\"\n            },\n            \"quantity\": 2,\n            \"totalPrice\": 500000,\n            \"paymentStatus\": 0,\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"tickets\": [\n                {\n                    \"id\": \"632169497f0236bfb3e8fce0\",\n                    \"from\": \"Yogyakarta\",\n                    \"to\": \"Jakarta\",\n                    \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n                    \"bookingId\": \"632169497f0236bfb3e8fcde\",\n                    \"userId\": \"632131ee55dfb08745d2250b\",\n                    \"createdAt\": \"2022-09-14T05:40:25.766Z\",\n                    \"updatedAt\": \"2022-09-14T05:40:25.766Z\",\n                    \"price\": 250000\n                },\n                {\n                    \"id\": \"632169497f0236bfb3e8fce2\",\n                    \"from\": \"Yogyakarta\",\n                    \"to\": \"Jakarta\",\n                    \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n                    \"bookingId\": \"632169497f0236bfb3e8fcde\",\n                    \"userId\": \"632131ee55dfb08745d2250b\",\n                    \"createdAt\": \"2022-09-14T05:40:25.775Z\",\n                    \"updatedAt\": \"2022-09-14T05:40:25.775Z\",\n                    \"price\": 250000\n                }\n            ],\n            \"createdAt\": \"2022-09-14T05:40:25.760Z\",\n            \"updatedAt\": \"2022-09-14T05:40:25.782Z\",\n            \"id\": \"632169497f0236bfb3e8fcde\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get All Bookings - error need admin role",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking?size=2&page=1",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "2"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-gJAHz/3ltoRSM1Lfi4co8rvPVXU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 03:38:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Require Admin Role!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Booking by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{bookingHost}}/api/v1/booking/632169497f0236bfb3e8fcde",
+							"host": [
+								"{{bookingHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"booking",
+								"632169497f0236bfb3e8fcde"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Booking by Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking/632169497f0236bfb3e8fcde",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking",
+										"632169497f0236bfb3e8fcde"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "871"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"367-SWijioivybijCFrUXQMhfy0KaOM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 05:44:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"632131ee55dfb08745d2250b\",\n        \"name\": \"Bruce Wayne\",\n        \"email\": \"bruce.wayne@email.com\"\n    },\n    \"quantity\": 2,\n    \"totalPrice\": 500000,\n    \"paymentStatus\": 0,\n    \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n    \"tickets\": [\n        {\n            \"id\": \"632169497f0236bfb3e8fce0\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169497f0236bfb3e8fcde\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:25.766Z\",\n            \"updatedAt\": \"2022-09-14T05:40:25.766Z\",\n            \"price\": 250000\n        },\n        {\n            \"id\": \"632169497f0236bfb3e8fce2\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169497f0236bfb3e8fcde\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:25.775Z\",\n            \"updatedAt\": \"2022-09-14T05:40:25.775Z\",\n            \"price\": 250000\n        }\n    ],\n    \"createdAt\": \"2022-09-14T05:40:25.760Z\",\n    \"updatedAt\": \"2022-09-14T05:40:25.782Z\",\n    \"id\": \"632169497f0236bfb3e8fcde\"\n}"
+						},
+						{
+							"name": "Get Booking by Id - error not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking/632169497f0236bfb3e8fcd",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking",
+										"632169497f0236bfb3e8fcd"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c-V8Sy+qFjIi5sbh537uQu8FNAyW0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 06:35:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error when retrieving bookings with id 632169497f0236bfb3e8fcd\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Complete Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"bookingId\":\"632169497f0236bfb3e8fcde\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bookingHost}}/api/v1/booking/complete",
+							"host": [
+								"{{bookingHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"booking",
+								"complete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Complete Booking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"bookingId\":\"632169497f0236bfb3e8fcde\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking/complete",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking",
+										"complete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "871"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"367-1Cm/glZCtJ08MQllbCLlNGCXGZg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 05:45:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"632131ee55dfb08745d2250b\",\n        \"name\": \"Bruce Wayne\",\n        \"email\": \"bruce.wayne@email.com\"\n    },\n    \"quantity\": 2,\n    \"totalPrice\": 500000,\n    \"paymentStatus\": 1,\n    \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n    \"tickets\": [\n        {\n            \"id\": \"632169497f0236bfb3e8fce0\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169497f0236bfb3e8fcde\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:25.766Z\",\n            \"updatedAt\": \"2022-09-14T05:40:25.766Z\",\n            \"price\": 250000\n        },\n        {\n            \"id\": \"632169497f0236bfb3e8fce2\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169497f0236bfb3e8fcde\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:25.775Z\",\n            \"updatedAt\": \"2022-09-14T05:40:25.775Z\",\n            \"price\": 250000\n        }\n    ],\n    \"createdAt\": \"2022-09-14T05:40:25.760Z\",\n    \"updatedAt\": \"2022-09-14T05:45:13.052Z\",\n    \"id\": \"632169497f0236bfb3e8fcde\"\n}"
+						},
+						{
+							"name": "Complete Booking - error complete booking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"bookingId\":\"63214bfaccc45435e129390d\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking/complete",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking",
+										"complete"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "89"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"59-08+XGVxYb8beQAK0r6kpKV71oac\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 03:42:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error, complete payment only can be done when payment status is 0 (Created)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"bookingId\":\"632169377f0236bfb3e8fcce\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bookingHost}}/api/v1/booking/cancel",
+							"host": [
+								"{{bookingHost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"booking",
+								"cancel"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cancel Booking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"bookingId\":\"632169377f0236bfb3e8fcce\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking/cancel",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking",
+										"cancel"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1712"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6b0-Plw5toSw2FItR+SIFF1Z20mXDG0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 05:47:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"632131ee55dfb08745d2250b\",\n        \"name\": \"Bruce Wayne\",\n        \"email\": \"bruce.wayne@email.com\"\n    },\n    \"quantity\": 5,\n    \"totalPrice\": 1250000,\n    \"paymentStatus\": 2,\n    \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n    \"tickets\": [\n        {\n            \"id\": \"632169377f0236bfb3e8fcd0\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169377f0236bfb3e8fcce\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:07.824Z\",\n            \"updatedAt\": \"2022-09-14T05:40:07.824Z\",\n            \"price\": 250000\n        },\n        {\n            \"id\": \"632169377f0236bfb3e8fcd2\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169377f0236bfb3e8fcce\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:07.838Z\",\n            \"updatedAt\": \"2022-09-14T05:40:07.838Z\",\n            \"price\": 250000\n        },\n        {\n            \"id\": \"632169377f0236bfb3e8fcd4\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169377f0236bfb3e8fcce\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:07.824Z\",\n            \"updatedAt\": \"2022-09-14T05:40:07.824Z\",\n            \"price\": 250000\n        },\n        {\n            \"id\": \"632169377f0236bfb3e8fcd6\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169377f0236bfb3e8fcce\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:07.856Z\",\n            \"updatedAt\": \"2022-09-14T05:40:07.856Z\",\n            \"price\": 250000\n        },\n        {\n            \"id\": \"632169377f0236bfb3e8fcd8\",\n            \"from\": \"Yogyakarta\",\n            \"to\": \"Jakarta\",\n            \"departureTime\": \"2022-10-01T12:00:00.000Z\",\n            \"bookingId\": \"632169377f0236bfb3e8fcce\",\n            \"userId\": \"632131ee55dfb08745d2250b\",\n            \"createdAt\": \"2022-09-14T05:40:07.865Z\",\n            \"updatedAt\": \"2022-09-14T05:40:07.865Z\",\n            \"price\": 250000\n        }\n    ],\n    \"createdAt\": \"2022-09-14T05:40:07.811Z\",\n    \"updatedAt\": \"2022-09-14T05:47:59.098Z\",\n    \"id\": \"632169377f0236bfb3e8fcce\"\n}"
+						},
+						{
+							"name": "Cancel Booking - error cancel",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"bookingId\":\"63214b8accc45435e12938fe\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{bookingHost}}/api/v1/booking/cancel",
+									"host": [
+										"{{bookingHost}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"booking",
+										"cancel"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type,Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "87"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57-YPrybh2Ty9Rpoulrf1+IHYsVt+Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Sep 2022 03:45:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error, cancel payment only can be done when payment status is 0 (Created)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Hello Booking Service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bookingHost}}",
+							"host": [
+								"{{bookingHost}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Hello Booking Service",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{bookingHost}}",
+									"host": [
+										"{{bookingHost}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-bHyHOqnqLgwvzVia6xdx4lo/anI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Sep 2022 04:13:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"This is ticketing app, booking service.\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjEzMGZmNTVkZmIwODc0NWQyMjRlZCIsInJvbGVzIjpbImFkbWluIl0sImlhdCI6MTY2MzExOTY4OSwiZXhwIjoxNjYzMjA2MDg5fQ.gOYUQnvNeS2uEqyKITVfRaans4gmfY8qRpDPLA_kdjs",
+			"type": "string"
+		},
+		{
+			"key": "secret-key",
+			"value": "75KpYRdmyU5uG1vjDKCmJnyHz8VsHG",
+			"type": "string"
+		},
+		{
+			"key": "userHost",
+			"value": "http://localhost:10081",
+			"type": "string"
+		},
+		{
+			"key": "routeHost",
+			"value": "http://localhost:10082",
+			"type": "string"
+		},
+		{
+			"key": "bookingHost",
+			"value": "http://localhost:10083",
+			"type": "string"
+		}
+	]
+}

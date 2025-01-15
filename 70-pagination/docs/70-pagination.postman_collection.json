@@ -1,0 +1,804 @@
+{
+	"info": {
+		"_postman_id": "84933592-9756-4186-8df9-213a351b8c28",
+		"name": "70-pagination",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "519759"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Find All Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/user?name=Bruc&page=1&size=2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Bruc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Find All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/user?page=1&size=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "rob",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "507"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1fb-ZBsUjxaDz9jGe8hI8s25++5qE7g\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:25:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1,\n    \"count\": 4,\n    \"totalPages\": 2,\n    \"currentPage\": 1,\n    \"users\": [\n        {\n            \"name\": \"John Doe\",\n            \"email\": \"john.doe@email.com\",\n            \"roles\": [\n                {\n                    \"_id\": \"6320263cdcd60d96c8e316c5\",\n                    \"name\": \"admin\"\n                }\n            ],\n            \"createdAt\": \"2022-09-13T06:59:38.791Z\",\n            \"updatedAt\": \"2022-09-13T06:59:38.802Z\",\n            \"id\": \"63202a5adcd60d96c8e316cb\"\n        },\n        {\n            \"name\": \"Bruce Wayne\",\n            \"email\": \"bruce.wayne@email.com\",\n            \"roles\": [\n                {\n                    \"_id\": \"6320263cdcd60d96c8e316c4\",\n                    \"name\": \"user\"\n                }\n            ],\n            \"createdAt\": \"2022-09-13T07:19:47.058Z\",\n            \"updatedAt\": \"2022-09-13T07:19:47.074Z\",\n            \"id\": \"63202f13be8620c4cf9fc030\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Find All Users - filter by name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/user?name=Bruc&page=1&size=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Bruc"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"120-NgjN2enfkVYWDy3sZLsVQhcnbLo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:26:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1,\n    \"count\": 1,\n    \"totalPages\": 1,\n    \"currentPage\": 1,\n    \"users\": [\n        {\n            \"name\": \"Bruce Wayne\",\n            \"email\": \"bruce.wayne@email.com\",\n            \"roles\": [\n                {\n                    \"_id\": \"6320263cdcd60d96c8e316c4\",\n                    \"name\": \"user\"\n                }\n            ],\n            \"createdAt\": \"2022-09-13T07:19:47.058Z\",\n            \"updatedAt\": \"2022-09-13T07:19:47.074Z\",\n            \"id\": \"63202f13be8620c4cf9fc030\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Find All Users - error unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/user",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "user",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 03:51:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Get Item",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/item?page=2&size=3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"item"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Item",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/item?page=2&size=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"item"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "498"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f2-1wL1y+6/Xl7tI7jWKJHH26WoLuA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:38:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1,\n    \"count\": 6,\n    \"totalPages\": 2,\n    \"currentPage\": 2,\n    \"items\": [\n        {\n            \"_id\": \"632030fcbe8620c4cf9fc072\",\n            \"name\": \"Test4\",\n            \"qty\": 8,\n            \"createdAt\": \"2022-09-13T07:27:56.555Z\",\n            \"updatedAt\": \"2022-09-13T07:27:56.555Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"63203101be8620c4cf9fc074\",\n            \"name\": \"Test5\",\n            \"qty\": 10,\n            \"createdAt\": \"2022-09-13T07:28:01.400Z\",\n            \"updatedAt\": \"2022-09-13T07:28:01.400Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6320323ba8294e0dc7487fe8\",\n            \"name\": \"Test6\",\n            \"qty\": 12,\n            \"createdAt\": \"2022-09-13T07:33:15.185Z\",\n            \"updatedAt\": \"2022-09-13T07:33:15.185Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "Get All Route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/route?to=Jakarta&page=2&size=3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "Malang",
+									"disabled": true
+								},
+								{
+									"key": "to",
+									"value": "Jakarta"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Route - Pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route?to=Jakarta&page=2&size=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "Jakarta"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "623"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26f-rPzlwPeFJwv/j8Xzy/4jEpfo1kc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:47:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"count\": 7,\n    \"totalPages\": 3,\n    \"currentPage\": 2,\n    \"routes\": [\n        {\n            \"departureTime\": \"12:00:00\",\n            \"from\": \"Yogyakarta\",\n            \"price\": 250000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T07:42:26.440Z\",\n            \"updatedAt\": \"2022-09-13T07:42:26.440Z\",\n            \"id\": \"63203462e48745f34f1207bc\"\n        },\n        {\n            \"departureTime\": \"13:00:00\",\n            \"from\": \"Solo\",\n            \"price\": 225000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T07:42:26.441Z\",\n            \"updatedAt\": \"2022-09-13T07:42:26.441Z\",\n            \"id\": \"63203462e48745f34f1207c0\"\n        },\n        {\n            \"departureTime\": \"10:00:00\",\n            \"from\": \"Semarang\",\n            \"price\": 200000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T07:42:26.439Z\",\n            \"updatedAt\": \"2022-09-13T07:42:26.439Z\",\n            \"id\": \"63203462e48745f34f1207ce\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get All Route - error unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route?to=Jakarta&page=2&size=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "Jakarta"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-kxKR3O61JqX6EyHbY64n1AR0ZxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:51:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized!\"\n}"
+						},
+						{
+							"name": "Get All Route - error no token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route?to=Jakarta&page=2&size=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "Jakarta"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 07:51:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Hello, pagination feature",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Hello, pagination feature",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}",
+							"host": [
+								"{{host}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37-WS9YeD0DEGRRAf9ZqmqDRL8xMoY\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Sep 2022 08:07:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Hello, now we add pagination feature in our application"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:10081",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTE2YTQ5NGQ3YjMwOThlMTg2ODRhNiIsImlhdCI6MTY2MjA4NzA2MiwiZXhwIjoxNjYyMTczNDYyfQ.hV2sAGJq4GEUS2xGs9hfnCHWm2HELzc-XcNXmbCyzk0",
+			"type": "string"
+		}
+	]
+}

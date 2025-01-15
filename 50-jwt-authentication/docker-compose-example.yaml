@@ -1,0 +1,55 @@
+version: '3'
+# this name will be useful for (e.g.) "docker compose -p"
+name: node-jwt
+
+services:
+  # This service name will be accessed by app in MONGODB_URI
+  mongodb:
+    image: mongo:4.4
+    # This will expose mongodb on port 10017 on docker host, useful for
+    # dev purposes. You should NOT expose db port directly
+    # on prod environment.
+    #
+    # Node app will acess this service using the original port
+    # (27017) in MONGODB_URI.
+    ports:
+      - 10017:27017
+    # Where to store mongodb data.
+    volumes:
+      - ./mongo:/data/db
+    environment:
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_USERNAME 
+      # must be the same as MONGODB_USER on "node" service.
+      - MONGO_INITDB_ROOT_USERNAME=<mongodb user name>
+      # When using this docker-compose.yaml, MONGO_INITDB_ROOT_PASSWORD 
+      # must be the same as MONGODB_PASS on "node" service.
+      - MONGO_INITDB_ROOT_PASSWORD=<password for mongodb user>
+
+  node:
+    # This will expose nodejs app on port 10081 on docker host
+    ports:
+      - '10081:8080'
+    build:
+      # Since docker-compose.yaml is moved to parent directory
+      # (see "directory structure" above), "context" is not "."
+      # anymore
+      context: ./node
+      # dockerfile location is relative to context
+      dockerfile: Dockerfile
+    environment:
+      # Listen on all ipv4 interfaces
+      - HOST=0.0.0.0
+      # Original port in "ports" above. It also needs to be EXPOSE-d
+      # in Dockerfile
+      - PORT=8080
+      # Use service name, port, user, and pass from "mongodb" service 
+      # on dev env
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_USER=<mongodb user name>
+      - MONGODB_PASS=<password for mongodb user>
+      # Which database to use
+      - MONGODB_DB=<mongodb database used>
+      # Secret to encrypt JWT Token
+      - SECRET=<secret>
+      # Secret Key to use for creating the first user
+      - SECRET_KEY=<secret key>

@@ -1,0 +1,389 @@
+openapi: '3.0.2'
+info:
+  description: "## Add Route service to add, import, find and update ticketing route"
+  version: 1.0.0
+  title: 60-upload-file
+servers:
+  - url: http://localhost:10081
+tags:
+  - name: root 
+    description: "Request to root URL"
+  - name: route
+    description: "Request to route URL"
+  
+paths:
+  /:
+    get:
+      tags: 
+        - root
+      summary: Request directly to root URL
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html: 
+              schema: 
+                type: string
+                example: "Hello, now we are able to import ticketing route data."
+  /api/v1/route/import:
+    post:
+      tags: 
+        - route
+      summary: Import Ticketing Route CSV file to App server, this feature only accessible by role admin.  
+      description: ""
+      operationId: "routeImport"
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema: 
+              type: object
+              properties:
+                routeFile:
+                  type: string
+                  format: binary
+        description: CSV route file to import
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/importFileSuccess"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/noFileError"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/requiredAdminRoleError"
+                  - $ref: "#/components/schemas/noTokenProvided"
+  /api/v1/route:
+    post:
+      tags:
+        - route 
+      summary: Create new route, this feature need Role Admin
+      description: ""
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createNewRoute"
+        description: Object from, to, price, departureTime are required
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createNewRouteSuccess"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/newRouteError"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/requiredAdminRoleError"
+                  - $ref: "#/components/schemas/noTokenProvided"
+    get:
+      tags:
+        - route
+      summary: Find all route, or find route with filter by from location or to location
+      description: ""
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: from
+          required: false
+          description: 'String query to search filter by "from" location '
+          schema:
+            type: string
+        - in: query
+          name: to
+          required: false
+          description: 'String query to search filter by "to" location '
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/findAllRouteSuccess"
+        "403":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/noTokenProvided"
+  /api/v1/route/{id}:
+    get:
+      tags:
+        - route
+      summary: Get route by id
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Route id to find
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/findRouteSuccess"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/routeNotFoundError"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/noTokenProvided"
+    put:
+      tags:
+        - route
+      summary: Update route by ID
+      description: Field to update from (optional), to (optional), price (optional)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Route id to update
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createNewRoute"
+        description: Object from (optional), to (optional), price (optional), departureTime (optional)
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/updateRouteSuccess"
+        "404":
+          description: Not found
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/updateRouteNotFoundError"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/requiredAdminRoleError"
+                  - $ref: "#/components/schemas/noTokenProvided"
+
+components:
+  securitySchemes:
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    unauthorizedError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Unauthorized!"
+    noTokenProvided:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "No token provided!"
+    noFileError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "No files were uploaded!"
+    importFileSuccess:
+      type: object
+      properties:
+        message:  
+          type: string
+          example: Route data has successfully imported
+    requiredAdminRoleError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Require Admin Role!
+    createNewRoute:
+      type: object
+      properties:
+        from:
+          type: string
+          example: Malang
+        to:
+          type: string
+          example: Jakarta
+        price:
+          type: integer
+          example: 200000
+        departureTime:
+          type: string
+          example: 09:00:00
+    createNewRouteSuccess:
+      type: object
+      properties:
+        from:
+          type: string
+          example: Malang
+        to:
+          type: string
+          example: Jakarta
+        price:
+          type: integer
+          example: 200000
+        departureTime:
+          type: string
+          example: 09:00:00
+        createdAt:
+          type: string
+          example: "2022-09-13T01:12:00.000Z"
+        updatedAt:
+          type: string
+          example: "2022-09-13T01:12:00.000Z"
+        id:
+          type: string
+          example: 631fd8dff7a9117a6a09de96
+    newRouteError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Field from, to, price, departureTime cannot be empty
+    findAllRouteSuccess:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 1
+        count:
+          type: integer
+          example: 3
+        routes:
+          type: array
+          items:
+            type: object
+            properties:
+              from:
+                type: string
+              to:
+                type: string
+              price:
+                type: integer
+              departureTime:  
+                type: string
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              id:
+                type: string
+          example:
+            - from: Jakarta
+              to: Bandung
+              price: 200000
+              departureTime: 09:00:00
+              createdAt: "2022-09-13T00:36:53.635Z"
+              updatedAt: "2022-09-13T00:36:53.635Z"
+              id: 631fd0a5c3b9ff7c80dcb499
+            - from: Jakarta
+              to: Semarang
+              price: 200000
+              departureTime: 10:00:00
+              createdAt: "2022-09-13T00:36:53.648Z"
+              updatedAt: "2022-09-13T00:36:53.648Z"
+              id: 631fd0a5c3b9ff7c80dcb49a
+            - from: Malang
+              to: Jakarta
+              price: 200000
+              departureTime: 09:00:00
+              createdAt: "2022-09-13T01:12:00.000Z"
+              updatedAt: "2022-09-13T01:12:00.000Z"
+              id: 631fd8dff7a9117a6a09de96
+    findRouteSuccess:
+      type: object
+      properties:
+        from:
+          type: string
+          example: Malang
+        to:
+          type: string
+          example: Bandung
+        price:
+          type: integer
+          example: 250000
+        departureTime: 
+          type: string
+          example: 15:00:00
+        createdAt:
+          type: string
+          example: "2022-09-13T00:44:20.383Z"
+        updatedAt:
+          type: string
+          example: "2022-09-13T00:52:43.084Z"
+        id:
+          type: string
+          example: 631fd2648547b98f23fd08ee
+    updateRouteNotFoundError:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: "Cannot update route with id=631fd2648547b98f23fd08ea. Maybe route was not found!"
+    routeNotFoundError:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: Not found route with id 631fd2648547b98f23fd08ea
+    updateRouteSuccess:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: "Route was updated successfully."

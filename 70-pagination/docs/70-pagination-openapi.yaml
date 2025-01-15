@@ -1,0 +1,345 @@
+openapi: '3.0.2'
+info:
+  description: "## Add pagination for array data response"
+  version: 1.0.0
+  title: 70-pagination
+servers:
+  - url: http://localhost:10081
+tags:
+  - name: root 
+    description: "Request to root URL"
+  - name: user
+    description: "Request to user URL"
+  - name: item
+    description: "Request to item URL"
+  - name: route
+    description: "Request to route URL"
+  
+paths:
+  /:
+    get:
+      tags: 
+        - root
+      summary: Request directly to root URL
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html: 
+              schema: 
+                type: string
+                example: "Hello, now we add pagination feature in our application"
+  /api/v1/user:
+    get:
+      tags:
+        - user
+      summary: Get all user and search all user by name, this endpoint only available for role admin
+      description: ""
+      operationId: "findAll"
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: name
+          required: false
+          description: "Query filter by name"
+          schema:
+            type: string
+        - in: query
+          name: page
+          required: false
+          description: "Query data by page number"
+          schema:
+            type: integer
+        - in: query
+          name: size
+          required: false
+          description: "Limit size per page"
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/findUserAll"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+  /api/v1/item:
+    get:
+      tags: 
+        - item
+      summary: This endpoint will show all item data in JSON format
+      description: ""
+      parameters:
+        - in: query
+          name: page
+          required: false
+          description: "Query data by page number"
+          schema:
+            type: integer
+        - in: query
+          name: size
+          required: false
+          description: "Limit size per page"
+          schema: 
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getItem"
+  /api/v1/route:
+    get:
+      tags:
+        - route
+      summary: Find all route, or find route with filter by from location or to location
+      description: ""
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: from
+          required: false
+          description: 'String query to search filter by "from" location '
+          schema:
+            type: string
+        - in: query
+          name: to
+          required: false
+          description: 'String query to search filter by "to" location '
+          schema:
+            type: string
+        - in: query
+          name: page
+          required: false
+          description: "Query data by page number"
+          schema:
+            type: integer
+        - in: query
+          name: size
+          required: false
+          description: "Limit size per page"
+          schema: 
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/findAllRouteSuccess"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/unauthorizedError"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/noTokenProvided"
+components:
+  securitySchemes:
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    unauthorizedError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Unauthorized!"
+    noTokenProvided:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "No token provided!"
+    requiredAdminRoleError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Require Admin Role!
+    findAllRouteSuccess:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 1
+        count:
+          type: integer
+          example: 7
+        totalPages:
+          type: integer
+          example: 3
+        currentPage: 
+          type: integer
+          example: 2
+        routes:
+          type: array
+          items:
+            type: object
+            properties:
+              from:
+                type: string
+              to:
+                type: string
+              price:
+                type: integer
+              departureTime:  
+                type: string
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              id:
+                type: string
+          example:
+            - from: Yogyakarta
+              to: Jakarta
+              price: 250000
+              departureTime: 12:00:00
+              createdAt: "2022-09-13T07:42:26.440Z"
+              updatedAt: "2022-09-13T07:42:26.440Z"
+              id: 63203462e48745f34f1207bc
+            - from: Solo
+              to: Jakarta
+              price: 225000
+              departureTime: 13:00:00
+              createdAt: "2022-09-13T07:42:26.441Z"
+              updatedAt: "2022-09-13T07:42:26.441Z"
+              id: 63203462e48745f34f1207c0
+            - from: Semarang
+              to: Jakarta
+              price: 200000
+              departureTime: 10:00:00
+              createdAt: "2022-09-13T07:42:26.439Z"
+              updatedAt: "2022-09-13T07:42:26.439Z"
+              id: 63203462e48745f34f1207ce
+    findUserAll:
+      type: object
+      properties:
+        success: 
+          type: integer
+          example: 1
+        count:
+          type: integer
+          example: 4
+        totalPages: 
+          type: integer
+          example: 2
+        currentPage: 
+          type: integer
+          example: 1
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/getAdmin'
+          example:
+            - id: 631ee5973db6eb982cc7f511
+              name: John Doe
+              email: john.doe@email.com
+              roles: [{id: 631ee58d3db6eb982cc7f50d, name: admin}]
+              createdAt: "2022-09-12T03:19:20.279Z"
+              updatedAt: "2022-09-12T03:19:20.315Z"
+            - id: 631ef2b8c317b521ed7c6de6
+              name: Bruce Wayne
+              email: bruce.wayne@email.com
+              roles: [{id: 631ee58d3db6eb982cc7f50c, name: user}]
+              createdAt: "2022-09-12T08:50:00.732Z"
+              updatedAt: "2022-09-12T08:50:00.744Z"
+    getAdmin:
+      type: object
+      properties: 
+        id:
+          type: string
+          example: 631ee5973db6eb982cc7f511
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john.doe@email.com
+        roles:
+          type: array
+          items:
+            properties: 
+              _id: 
+                type: string
+                example: 631ee58d3db6eb982cc7f50d
+              name:
+                type: string
+                example: admin
+        createdAt:
+          type: string
+          example: "2022-09-12T03:19:20.279Z"
+        updatedAt:
+          type: string
+          example: "2022-09-12T03:19:20.315Z"
+    getItem:
+      type: object
+      properties: 
+        success: 
+          type: integer
+          example: 1
+        count:
+          type: integer
+          example: 6
+        totalPages: 
+          type: integer
+          example: 2
+        currentPage: 
+          type: integer
+          example: 2
+        items:
+          type: array
+          items: 
+            type: object
+            properties:
+              _id: 
+                type: string
+              name: 
+                type: string
+              qty: 
+                type: integer 
+              createdAt: 
+                type: string
+              updatedAt:
+                type: string
+              __v: 
+                type: integer
+          example:
+            - _id: "632030fcbe8620c4cf9fc072"
+              name: Test4
+              qty: 8
+              createdAt: "2022-09-13T07:27:56.555Z"
+              updatedAt: "2022-09-13T07:27:56.555Z"
+              __v: 0
+            - _id: "63203101be8620c4cf9fc074"
+              name: Test5
+              qty: 10
+              createdAt: "2022-09-13T07:28:01.400Z"
+              updatedAt: "2022-09-13T07:28:01.400Z"
+              __v: 0
+            - _id: "6320323ba8294e0dc7487fe8"
+              name: Test6
+              qty: 12
+              createdAt: "2022-09-13T07:33:15.185Z"
+              updatedAt: "2022-09-13T07:33:15.185Z"
+              __v: 0

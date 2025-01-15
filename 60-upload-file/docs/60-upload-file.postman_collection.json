@@ -1,0 +1,1516 @@
+{
+	"info": {
+		"_postman_id": "f6ad117d-93c8-4b34-9ac0-248e44e0d51c",
+		"name": "60-upload-file",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "519759"
+	},
+	"item": [
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "Import Data Route File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "routeFile",
+									"type": "file",
+									"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/route/import",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route",
+								"import"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Import Data Route File",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/import",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-3FL+oOCPbtbANHFFusgXkEGCC00\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:10:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Route data has successfully imported\"\n}"
+						},
+						{
+							"name": "Import Data Route File - error no file",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/import",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-x/cRPKjn/s6boLE6LEgNxn/1P/Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:11:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No files were uploaded\"\n}"
+						},
+						{
+							"name": "Import Data Route File - error no token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/import",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:11:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						},
+						{
+							"name": "Import Data Route File - error required admin role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "routeFile",
+											"type": "file",
+											"src": "/C:/Users/Eric J Sudadyo/Downloads/ticket_data.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/import",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"import"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-yJZAZo1xBrkx6ovRbYzgTmtQpB0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:18:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Require Admin Role!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create new route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/route",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create new route",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b8-vD/Wj0gx6T0Cck4S5m7hIZIq3Cs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:12:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"from\": \"Malang\",\n    \"to\": \"Jakarta\",\n    \"price\": 200000,\n    \"departureTime\": \"09:00:00\",\n    \"createdAt\": \"2022-09-13T01:12:00.000Z\",\n    \"updatedAt\": \"2022-09-13T01:12:00.000Z\",\n    \"id\": \"631fd8dff7a9117a6a09de96\"\n}"
+						},
+						{
+							"name": "Create new route - error missing field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-qsJKeKcQ5cRDNl2weA3gCJ0vv0A\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:12:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Field from, to, price, departureTime cannot be empty\"\n}"
+						},
+						{
+							"name": "Create new route - error no token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:12:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						},
+						{
+							"name": "Create new route - error required admin role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\":\"Malang\",\r\n    \"to\": \"Jakarta\",\r\n    \"price\": 200000,\r\n    \"departureTime\": \"09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-yJZAZo1xBrkx6ovRbYzgTmtQpB0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:19:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Require Admin Role!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/route?from=Malang",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "Malang"
+								},
+								{
+									"key": "to",
+									"value": "Jakarta",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Route",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "Jakarta",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3017"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bc9-Kd4YiMWtj8Xbz9fcq94VvHUj3O4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 03:46:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"count\": 16,\n    \"routes\": [\n        {\n            \"departureTime\": \"09:00:00\",\n            \"from\": \"Bandung\",\n            \"price\": 100000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T00:36:53.647Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.647Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb498\"\n        },\n        {\n            \"departureTime\": \"09:00:00\",\n            \"from\": \"Jakarta\",\n            \"price\": 200000,\n            \"to\": \"Bandung\",\n            \"createdAt\": \"2022-09-13T00:36:53.635Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.635Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb499\"\n        },\n        {\n            \"departureTime\": \"10:00:00\",\n            \"from\": \"Jakarta\",\n            \"price\": 200000,\n            \"to\": \"Semarang\",\n            \"createdAt\": \"2022-09-13T00:36:53.648Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.648Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb49a\"\n        },\n        {\n            \"departureTime\": \"11:00:00\",\n            \"from\": \"Surabaya\",\n            \"price\": 300000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T00:36:53.649Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.649Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb49d\"\n        },\n        {\n            \"departureTime\": \"12:00:00\",\n            \"from\": \"Jakarta\",\n            \"price\": 250000,\n            \"to\": \"Yogyakarta\",\n            \"createdAt\": \"2022-09-13T00:36:53.649Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.649Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb49f\"\n        },\n        {\n            \"departureTime\": \"12:00:00\",\n            \"from\": \"Yogyakarta\",\n            \"price\": 250000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T00:36:53.649Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.649Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4a1\"\n        },\n        {\n            \"departureTime\": \"13:00:00\",\n            \"from\": \"Jakarta\",\n            \"price\": 225000,\n            \"to\": \"Solo\",\n            \"createdAt\": \"2022-09-13T00:36:53.649Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.649Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4a5\"\n        },\n        {\n            \"departureTime\": \"13:00:00\",\n            \"from\": \"Solo\",\n            \"price\": 225000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T00:36:53.650Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.650Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4a7\"\n        },\n        {\n            \"departureTime\": \"14:00:00\",\n            \"from\": \"Semarang\",\n            \"price\": 175000,\n            \"to\": \"Bandung\",\n            \"createdAt\": \"2022-09-13T00:36:53.650Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.650Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4a9\"\n        },\n        {\n            \"departureTime\": \"15:00:00\",\n            \"from\": \"Semarang\",\n            \"price\": 200000,\n            \"to\": \"Surabaya\",\n            \"createdAt\": \"2022-09-13T00:36:53.650Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.650Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4ac\"\n        },\n        {\n            \"departureTime\": \"14:00:00\",\n            \"from\": \"Bandung\",\n            \"price\": 175000,\n            \"to\": \"Semarang\",\n            \"createdAt\": \"2022-09-13T00:36:53.650Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.650Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4ad\"\n        },\n        {\n            \"departureTime\": \"16:00:00\",\n            \"from\": \"Surabaya\",\n            \"price\": 250000,\n            \"to\": \"Bandung\",\n            \"createdAt\": \"2022-09-13T00:36:53.698Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.698Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4b1\"\n        },\n        {\n            \"departureTime\": \"10:00:00\",\n            \"from\": \"Semarang\",\n            \"price\": 200000,\n            \"to\": \"Jakarta\",\n            \"createdAt\": \"2022-09-13T00:36:53.648Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.648Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4b3\"\n        },\n        {\n            \"departureTime\": \"11:00:00\",\n            \"from\": \"Jakarta\",\n            \"price\": 300000,\n            \"to\": \"Surabaya\",\n            \"createdAt\": \"2022-09-13T00:36:53.648Z\",\n            \"updatedAt\": \"2022-09-13T00:36:53.648Z\",\n            \"id\": \"631fd0a5c3b9ff7c80dcb4b5\"\n        },\n        {\n            \"from\": \"Malang\",\n            \"to\": \"Bandung\",\n            \"price\": 250000,\n            \"departureTime\": \"15:00:00\",\n            \"createdAt\": \"2022-09-13T00:44:20.383Z\",\n            \"updatedAt\": \"2022-09-13T01:17:28.715Z\",\n            \"id\": \"631fd2648547b98f23fd08ee\"\n        },\n        {\n            \"from\": \"Malang\",\n            \"to\": \"Jakarta\",\n            \"price\": 200000,\n            \"departureTime\": \"09:00:00\",\n            \"createdAt\": \"2022-09-13T01:12:00.000Z\",\n            \"updatedAt\": \"2022-09-13T01:12:00.000Z\",\n            \"id\": \"631fd8dff7a9117a6a09de96\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get All Route - with filter",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route?from=Malang",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang"
+										},
+										{
+											"key": "to",
+											"value": "Jakarta",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "403"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"193-2mQsuD/eVBWaz8Try/+Xt+odmiE\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 03:45:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 1,\n    \"count\": 2,\n    \"routes\": [\n        {\n            \"from\": \"Malang\",\n            \"to\": \"Bandung\",\n            \"price\": 250000,\n            \"departureTime\": \"15:00:00\",\n            \"createdAt\": \"2022-09-13T00:44:20.383Z\",\n            \"updatedAt\": \"2022-09-13T01:17:28.715Z\",\n            \"id\": \"631fd2648547b98f23fd08ee\"\n        },\n        {\n            \"from\": \"Malang\",\n            \"to\": \"Jakarta\",\n            \"price\": 200000,\n            \"departureTime\": \"09:00:00\",\n            \"createdAt\": \"2022-09-13T01:12:00.000Z\",\n            \"updatedAt\": \"2022-09-13T01:12:00.000Z\",\n            \"id\": \"631fd8dff7a9117a6a09de96\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get All Route - error no token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route?from=Malang",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "Malang"
+										},
+										{
+											"key": "to",
+											"value": "Jakarta",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:14:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Route by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ee",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route",
+								"631fd2648547b98f23fd08ee"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Route by Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b8-cRBSu+upo4DeSHXWtWuJ6w2hMM0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:14:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"from\": \"Malang\",\n    \"to\": \"Bandung\",\n    \"price\": 250000,\n    \"departureTime\": \"15:00:00\",\n    \"createdAt\": \"2022-09-13T00:44:20.383Z\",\n    \"updatedAt\": \"2022-09-13T00:52:43.084Z\",\n    \"id\": \"631fd2648547b98f23fd08ee\"\n}"
+						},
+						{
+							"name": "Get Route by Id - error no route with id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ea",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ea"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-cHRVzqidVn7cWtwxysuSq2djrJ4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:15:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Not found route with id 631fd2648547b98f23fd08ea\"\n}"
+						},
+						{
+							"name": "Get Route by Id - error no token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:14:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Route by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ee",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"route",
+								"631fd2648547b98f23fd08ee"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Route by Id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-8ZwoGGk/hAPJ+DmJLtVeq0qCOvo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:17:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Route was updated successfully.\"\n}"
+						},
+						{
+							"name": "Edit Route by Id - error route not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ea",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ea"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"69-6oCnfJ3EExTHeQOf0uO36YnCYdM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:17:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cannot update route with id=631fd2648547b98f23fd08ea. Maybe route was not found!\"\n}"
+						},
+						{
+							"name": "Edit Route by Id - error no token",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ea",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ea"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-ydYYRvBC2vpmGqaSYfwoRy1Ifuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:18:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No token provided!\"\n}"
+						},
+						{
+							"name": "Edit Route by Id - error required admin role",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"to\":\"Bandung\",\r\n    \"price\":250000,\r\n    \"departureTime\":\"15:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/route/631fd2648547b98f23fd08ee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"route",
+										"631fd2648547b98f23fd08ee"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Origin, Content-Type, Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-yJZAZo1xBrkx6ovRbYzgTmtQpB0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Sep 2022 01:19:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Require Admin Role!\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Hello Import Feature",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Hello Import Feature",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}",
+							"host": [
+								"{{host}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-kkzkmSWIVRG4cMycRvQKWZFpWPc\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Sep 2022 00:43:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Hello, now we are able to import ticketing route data."
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:10081",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTE2YTQ5NGQ3YjMwOThlMTg2ODRhNiIsImlhdCI6MTY2MjA4NzA2MiwiZXhwIjoxNjYyMTczNDYyfQ.hV2sAGJq4GEUS2xGs9hfnCHWm2HELzc-XcNXmbCyzk0",
+			"type": "string"
+		}
+	]
+}
